@@ -1,0 +1,185 @@
+// Made in Heaven - Tweaks
+//
+// WeiDU installer
+
+BACKUP "mih_tweaks/backup"
+
+AUTHOR "angel@pearlgates.net"
+VERSION v1
+
+//MODDER missing_eval none missing_resref none
+ASK_EVERY_COMPONENT
+NO_IF_EVAL_BUG
+AUTO_EVAL_STRINGS
+AUTO_TRA "mih_tweaks/language/%s"
+
+ALWAYS
+  // Do the following only once per install
+  ACTION_IF NOT VARIABLE_IS_SET done_init
+  BEGIN
+    OUTER_SET done_init = 1
+
+
+    // We no longer support vanilla BG1 or Tutu, it's too much of a hassle.
+
+    ACTION_IF GAME_IS "bg1 totsc tutu tutu_totsc"
+    BEGIN
+      FAIL ~Sorry, but this mod no longer supports this version of the game.~
+    END
+
+    // Load compatibility variables for various implementations of BG1.
+
+    INCLUDE "%MOD_FOLDER%/lib/g3_bgt_cpmvars.tpa"
+    INCLUDE "%MOD_FOLDER%/lib/g3_bgee_cpmvars.tpa"
+    INCLUDE "%MOD_FOLDER%/lib/g3_eet_cpmvars.tpa"
+
+
+    // BG(2)EE compat: handle charsets
+
+    ACTION_DEFINE_ARRAY mh#reload BEGIN "setup-%MOD_FOLDER%" END
+    ACTION_DEFINE_ARRAY mh#noconvert BEGIN END
+
+    LAUNCH_ACTION_FUNCTION HANDLE_CHARSETS
+      INT_VAR
+      infer_charset	= 1
+      STR_VAR
+      default_language	= "english"
+      tra_path		= "%MOD_FOLDER%/language"
+      iconv_path	= "%MOD_FOLDER%/bin/win32/iconv"
+      noconvert_array	= "mh#noconvert"
+      reload_array	= "mh#reload"
+    END
+
+
+    // Load macro/function libraries
+
+    INCLUDE "%MOD_FOLDER%/lib/mh_functions.tph"
+
+
+    // Read the .ini file for this mod
+
+    LAUNCH_ACTION_MACRO mh_process_ini_file
+  END	// done_init block
+END	// ALWAYS block
+
+
+LANGUAGE ~English~
+         ~english~
+	 ~%MOD_FOLDER%/language/english/setup-%MOD_FOLDER%.tra~
+
+
+// Relative Stat Bonuses from Equipped Items
+
+BEGIN ~Relative Stat Bonuses from Equipped Items~
+GROUP ~Item Tweaks~
+
+LAUNCH_ACTION_FUNCTION mh_run_task
+  STR_VAR
+  task		= "tweak_stat_items"
+END
+
+
+// Cap Item Charges
+
+BEGIN ~Cap Item Charges~
+GROUP ~Item Tweaks~
+
+LAUNCH_ACTION_FUNCTION mh_run_task
+  INT_VAR
+  charge_cap	= $ini_hash("item_charge_cap")
+  STR_VAR
+  task		= "tweak_item_charges"
+END
+
+
+// Protection from Evil blocks Domination
+
+BEGIN ~Protection from Evil blocks Domination~
+GROUP ~Spell Tweaks~
+
+LAUNCH_ACTION_FUNCTION mh_run_task
+  STR_VAR
+  task		= "tweak_protection_from_evil"
+END
+
+
+// Add Potions of Extra Healing to BG1
+
+BEGIN ~Add Potions of Healing to BG1~
+GROUP ~BG1 Tweaks~ GAME_INCLUDES "bg1"
+
+LAUNCH_ACTION_FUNCTION mh_run_task
+  STR_VAR
+  task		= "add_bg1_extra_healing"
+END
+
+
+// Add Priest Scrolls to Temples in BG1
+
+BEGIN ~Add Priest Scrolls to BG1 Temples~
+GROUP ~BG1 Tweaks~ GAME_INCLUDES "bg1"
+
+LAUNCH_ACTION_FUNCTION mh_run_task
+  STR_VAR
+  task		= "add_bg1_temple_scrolls"
+END
+
+
+// Fix BG1 Item Shops
+
+BEGIN ~Fix BG1 Item Shops~
+GROUP ~BG1 Tweaks~ GAME_INCLUDES "bg1"
+
+LAUNCH_ACTION_FUNCTION mh_run_task
+  STR_VAR
+  task		= "fix_bg1_item_shops"
+END
+
+
+// Nerf BG1 Easter Eggs
+
+BEGIN ~Nerf BG1 Easter Eggs~
+GROUP ~BG1 Tweaks~ GAME_INCLUDES "bg1"
+
+LAUNCH_ACTION_FUNCTION mh_run_task
+  STR_VAR
+  task		= "nerf_bg1_easter_eggs"
+END
+
+
+
+// Give Spectacles of Spectacle more charges
+
+BEGIN ~Give Spectacles of Spectacle more charges~
+GROUP ~BG1 Tweaks~ GAME_INCLUDES "bg1"
+
+REQUIRE_PREDICATE GAME_INCLUDES "sod" ~This component is not applicable to your game.~
+
+LAUNCH_ACTION_FUNCTION mh_run_task
+  STR_VAR
+  task		= "tweak_spectacles"
+END
+
+
+// Add Priest Scrolls to Temples in BG2
+
+BEGIN ~Add Priest Scrolls to BG2 Temples~
+GROUP ~BG2 Tweaks~ GAME_INCLUDES "bg2"
+
+LAUNCH_ACTION_FUNCTION mh_run_task
+  STR_VAR
+  task		= "add_bg2_temple_scrolls"
+END
+
+
+// Fix BG2 Item Shops
+
+BEGIN ~Fix BG2 Item Shops~
+GROUP ~BG2 Tweaks~ GAME_INCLUDES "bg2"
+
+LAUNCH_ACTION_FUNCTION mh_run_task
+  STR_VAR
+  task		= "fix_bg2_item_shops"
+END
+
+
