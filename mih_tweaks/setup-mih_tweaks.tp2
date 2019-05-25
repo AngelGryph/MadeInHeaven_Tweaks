@@ -141,6 +141,18 @@ LAUNCH_ACTION_FUNCTION mh_run_task
 END
 
 
+// BG1EE continues after Sarevok battle
+
+BEGIN ~BG1EE continues after Sarevok battle~
+GROUP ~BG1 Tweaks~ GAME_INCLUDES "bg1"
+
+REQUIRE_PREDICATE GAME_IS "bgee" ~This component is not applicable to your game.~
+
+LAUNCH_ACTION_FUNCTION mh_run_task
+  STR_VAR
+  task		= "tweak_bg1ee_ending"
+END
+
 
 // Give Spectacles of Spectacle more charges
 

@@ -1,0 +1,15 @@
+IF
+  True()
+THEN
+  RESPONSE #100
+    CutSceneID(Player1)
+    ClearAllActions()
+    SetGlobal("EndOfBG1", "GLOBAL", 2)
+    SaveGame(2)
+    Wait(1)
+    StartMovie("ENDMOVIE")
+    AddJournalEntry(@0, QUEST)
+    EndCutSceneMode()
+END
+
+

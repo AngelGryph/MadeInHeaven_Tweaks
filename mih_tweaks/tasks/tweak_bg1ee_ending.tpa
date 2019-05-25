@@ -1,0 +1,19 @@
+// BG1EE does not end after Sarevok battle
+
+ADD_JOURNAL EXISTING TITLE ( #31400 )
+  @0 USING "%MOD_FOLDER%/language/%LANGUAGE%/mh#endbg.tra"
+
+
+COMPILE "%MOD_FOLDER%/scripts/mh#endbg.baf"
+        "%MOD_FOLDER%/dialog/grand_dukes.d"
+
+
+COPY_EXISTING "%Undercity_TempleofBhaal_BCS%.bcs" "override"
+  DECOMPILE_AND_PATCH
+  BEGIN
+    REPLACE_TEXTUALLY CASE_INSENSITIVE EXACT_MATCH
+     ~"BDSODTRN"~
+     ~"mh#endbg"~
+  END
+
+
