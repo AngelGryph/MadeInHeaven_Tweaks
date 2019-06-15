@@ -1,15 +1,32 @@
-// Tweak Item Charges
-
-
-// Patch item definitions
+// Patch items and create list
 
 COPY_EXISTING_REGEXP ".+\.itm" "override"
-  GET_OFFSET_ARRAY ab_array ITM_V10_HEADERS
-  PHP_EACH ab_array AS int => ab_offset
+  PATCH_MATCH SHORT_AT (0x01c)
+  WITH
+  0x001a	// Staff
   BEGIN
-    PATCH_IF SHORT_AT (ab_offset + 0x0022) > charge_cap
+    SET charge_cap = charge_cap_wands
+  END
+  0x0023	// Wand
+  BEGIN
+    SET charge_cap = charge_cap_wands
+  END
+  DEFAULT
+    SET charge_cap = 0
+  END	// MATCH
+
+  
+  PATCH_IF charge_cap > 0
+  BEGIN
+    SET $item_charge_cap("%SOURCE_RES%") = charge_cap
+
+    GET_OFFSET_ARRAY ab_array ITM_V10_HEADERS
+    PHP_EACH ab_array AS int => ab_offset
     BEGIN
-      WRITE_SHORT (ab_offset + 0x0022) charge_cap
+      PATCH_IF SHORT_AT (ab_offset + 0x0022) > charge_cap
+      BEGIN
+        WRITE_SHORT (ab_offset + 0x0022) charge_cap
+      END
     END
   END
 
@@ -24,29 +41,23 @@ COPY_EXISTING_REGEXP ".+\.cre" "override"
   BEGIN
     READ_ASCII (itm_offset + 0x0000) itm_resref
 
-    PATCH_IF FILE_EXISTS_IN_GAME "%itm_resref%.itm"
+    PATCH_IF VARIABLE_IS_SET $item_charge_cap("%itm_resref%")
     BEGIN
-      INNER_PATCH_FILE "%itm_resref%.itm"
+      SET charge_cap = $item_charge_cap("%itm_resref%")
+
+      PATCH_IF SHORT_AT (itm_offset + 0x000a) > charge_cap
       BEGIN
-        READ_SHORT 0x0038 stack_max ELSE 2
+        WRITE_SHORT (itm_offset + 0x000a) charge_cap
       END
 
-      PATCH_IF (stack_max < 2)
+      PATCH_IF SHORT_AT (itm_offset + 0x000c) > charge_cap
       BEGIN
-	PATCH_IF SHORT_AT (itm_offset + 0x000a) > charge_cap
-	BEGIN
-	  WRITE_SHORT (itm_offset + 0x000a) charge_cap
-	END
+        WRITE_SHORT (itm_offset + 0x000c) charge_cap
+      END
 
-	PATCH_IF SHORT_AT (itm_offset + 0x000c) > charge_cap
-	BEGIN
-	  WRITE_SHORT (itm_offset + 0x000c) charge_cap
-	END
-
-	PATCH_IF SHORT_AT (itm_offset + 0x000e) > charge_cap
-	BEGIN
-	  WRITE_SHORT (itm_offset + 0x000e) charge_cap
-	END
+      PATCH_IF SHORT_AT (itm_offset + 0x000e) > charge_cap
+      BEGIN
+        WRITE_SHORT (itm_offset + 0x000e) charge_cap
       END
     END
   END
@@ -61,30 +72,23 @@ COPY_EXISTING_REGEXP ".+\.sto" "override"
   PHP_EACH itm_array AS int => itm_offset
   BEGIN
     READ_ASCII (itm_offset + 0x000) itm_resref
-
-    PATCH_IF FILE_EXISTS_IN_GAME "%itm_resref%.itm"
+    PATCH_IF VARIABLE_IS_SET $item_charge_cap("%itm_resref%")
     BEGIN
-      INNER_PATCH_FILE "%itm_resref%.itm"
+      SET charge_cap = $item_charge_cap("%itm_resref%")
+
+      PATCH_IF SHORT_AT (itm_offset + 0x000a) > charge_cap
       BEGIN
-        READ_SHORT 0x0038 stack_max ELSE 0
+        WRITE_SHORT (itm_offset + 0x000a) charge_cap
       END
 
-      PATCH_IF (stack_max < 2)
+      PATCH_IF SHORT_AT (itm_offset + 0x000c) > charge_cap
       BEGIN
-	PATCH_IF SHORT_AT (itm_offset + 0x000a) > charge_cap
-	BEGIN
-	  WRITE_SHORT (itm_offset + 0x000a) charge_cap
-	END
+        WRITE_SHORT (itm_offset + 0x000c) charge_cap
+      END
 
-	PATCH_IF SHORT_AT (itm_offset + 0x000c) > charge_cap
-	BEGIN
-	  WRITE_SHORT (itm_offset + 0x000c) charge_cap
-	END
-
-	PATCH_IF SHORT_AT (itm_offset + 0x000e) > charge_cap
-	BEGIN
-	  WRITE_SHORT (itm_offset + 0x000e) charge_cap
-	END
+      PATCH_IF SHORT_AT (itm_offset + 0x000e) > charge_cap
+      BEGIN
+        WRITE_SHORT (itm_offset + 0x000e) charge_cap
       END
     END
   END
@@ -102,31 +106,24 @@ COPY_EXISTING_REGEXP ".+\.are" "override"
     PHP_EACH itm_array AS int => itm_offset
     BEGIN
       READ_ASCII (itm_offset + 0x0000) itm_resref
-
-      PATCH_IF FILE_EXISTS_IN_GAME "%itm_resref%.itm"
+      PATCH_IF VARIABLE_IS_SET $item_charge_cap("%itm_resref%")
       BEGIN
-        INNER_PATCH_FILE "%itm_resref%.itm"
-        BEGIN
-          READ_SHORT 0x0038 stack_max ELSE 0
-        END
+        SET charge_cap = $item_charge_cap("%itm_resref%")
 
-        PATCH_IF (stack_max < 2)
-        BEGIN
-	  PATCH_IF SHORT_AT (itm_offset + 0x000a) > charge_cap
-	  BEGIN
-	    WRITE_SHORT (itm_offset + 0x000a) charge_cap
-	  END
+	PATCH_IF SHORT_AT (itm_offset + 0x000a) > charge_cap
+	BEGIN
+	  WRITE_SHORT (itm_offset + 0x000a) charge_cap
+	END
 
-	  PATCH_IF SHORT_AT (itm_offset + 0x000c) > charge_cap
-	  BEGIN
-	    WRITE_SHORT (itm_offset + 0x000c) charge_cap
-	  END
+	PATCH_IF SHORT_AT (itm_offset + 0x000c) > charge_cap
+	BEGIN
+	  WRITE_SHORT (itm_offset + 0x000c) charge_cap
+	END
 
-	  PATCH_IF SHORT_AT (itm_offset + 0x000e) > charge_cap
-	  BEGIN
-	    WRITE_SHORT (itm_offset + 0x000e) charge_cap
-	  END
-        END
+	PATCH_IF SHORT_AT (itm_offset + 0x000e) > charge_cap
+	BEGIN
+	  WRITE_SHORT (itm_offset + 0x000e) charge_cap
+	END
       END
     END
   END

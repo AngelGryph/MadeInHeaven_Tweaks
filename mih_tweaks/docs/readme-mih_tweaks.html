@@ -87,7 +87,7 @@ Made in Heaven: Item Pack is packaged and installed with WeiDU and is distribute
     <tr><td>25</td><td>+6</td></tr>
   </table>
   <p><strong>Cap Item Charges</strong><br />
-  This component alters items that operate on charges, like wands.  It will cap the maximum number of charges to 12.  If an item already has less charges, it will be unchanged.  Items from other mods are also effected (provided they are installed first).</p>
+  This component alters wands and staves that operate on charges.  It will cap the maximum number of charges of wands to 12, and staves to 25.  If an item already has less charges, it will be unchanged.  Items from other mods are also effected (provided they are installed first).</p>
   <p><strong>Sensible Item Shops</strong><br \>
   Okay, some would argue shops selling magical items makes no sense at all, but that's not what this modification is about.  This is about items that are not placed into shops that could logically carry them.  It mostly affects BG1, but makes some small BG2 modifications too.</p>
   <p>In BG1, it removes the stacks of magical large shields that some shops have, most notably the Nashkel shop which sells otherwise mundane equipment.  (Note: in BGEE this is already the default.)  To compensate for this, the Thunderhammer Smithy and Feldepost's Inn will each now sell one of these shields.</p>
@@ -109,20 +109,9 @@ This will add a few priest spell scrolls to most temples in BG1 and BG2.  Availa
 <div class="section">
   <p>Within the mod folder, there is a file called setup-mih.ini.  This file can be used to fine-tune certain aspects of this mod.  It is meant as an expert option, for normal installation you can leave this file as it is.  If you do edit this file, you must reinstall the mod, or at least the components whose settings you changed.</p>
   <table>
-    <tr><th colspan=2>MiH Item Pack</th></tr>
-    <tr><td>place_items_in_bg1</td><td>If set to 0, new items will not be added to BG1 (including TotSC) and Brokk will not appear.</td></tr>
-    <tr><td>place_items_in_sod</td><td>If set to 0, new items will not be added to Siege of Dragonspear (EE).</td><tr>
-    <tr><td>place_items_in_bp1</td><td>If set to 0, new items will not be added to Black Pits 1 (EE).</td></tr>
-    <tr><td>place_items_in_bg2</td><td>If set to 0, new items will not be added to the Shadows of Amn part of BG2.</td></tr>
-    <tr><td>place_items_in_tob</td><td>If set to 0, new items will not be added to Throne of Bhaal, including Watcher's Keep.</td></tr>
-    <tr><td>place_items_in_bp2</td><td>If set to 0, new items will not be added to Black Pits 2 (EE).</td></tr>
-    <tr><td>update_itemexcl_2da</td><td>If set to 0, itemexcl.2da will not be updated with the new items, removing some restrictions.</td></tr>
-    <tr><td>visible_ioun_stones</td><td>If set to 0, the new ioun stones will not be visible on the characters.</td></tr>
-    <tr><th colspan=2>Nerfed Cloak of Balduran</th></tr>
-    <tr><td>baldur_cloak_mres</td><td>New MR value for the cloak (10).  Yes, you can set it higher than 25%, you cheater...</td></tr>
-    <tr><td>baldur_cloak_in_bg2</td><td>If set to 0, the cloak will not be added to BG2, useful if another mod already has it.</td></tr>
     <tr><th colspan=2>Cap Item Charges</th></tr>
-    <tr><td>item_charge_cap</td><td>Controls the cap used (12).</td></tr>
+    <tr><td>item_charge_cap_wands</td><td>Controls the cap used for wands (12).</td></tr>
+    <tr><td>item_charge_cap_staves</td><td>Controls the cap used for staves (25).</td></tr>
     <tr><th colspan=2>Sensible Item Shops</th></tr>
     <tr><td>bg1_fix_large_shields</td><td>If set to 0, do not apply the large shield fix to BG1 shops.</td></tr>
     <tr><td>bg1_add_obscure_items</td><td>If set to 0, do not add obscure items to Beregost shops.</td></tr>
