@@ -9,6 +9,7 @@ THEN
     Wait(1)
     StartMovie("ENDMOVIE")
     AddJournalEntry(@0, QUEST)
+    TriggerActivation("Door0123", TRUE)
     EndCutSceneMode()
 END
 
