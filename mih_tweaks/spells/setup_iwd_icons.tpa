@@ -1,0 +1,9 @@
+DEFINE_ACTION_FUNCTION setup_iwd_icons
+BEGIN
+  LAUNCH_ACTION_FUNCTION run
+    STR_VAR
+    file	= "install_spell_icons install_scroll_icons"
+  END
+END	// setup_iwd_icons
+
+

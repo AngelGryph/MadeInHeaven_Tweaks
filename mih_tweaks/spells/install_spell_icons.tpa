@@ -1,0 +1,64 @@
+DEFINE_ACTION_FUNCTION install_spell_icons
+BEGIN
+  ACTION_BASH_FOR "%MOD_FOLDER%/%component_loc%/spell_icons" "^.+_[abc]\.bam$"
+  BEGIN
+    OUTER_PATCH_SAVE spell_name "%BASH_FOR_RES%"
+    BEGIN
+      REPLACE_TEXTUALLY CASE_INSENSITIVE EVALUATE_REGEXP
+        ~_[abc]$~ ~~
+    END
+
+    ACTION_IF IDS_OF_SYMBOL("spell" "%spell_name%") > 0
+    BEGIN
+      LAUNCH_ACTION_FUNCTION RES_NUM_OF_SPELL_NAME
+        STR_VAR
+        spell_name
+        RET
+	spell_num
+        spell_res
+      END
+
+      OUTER_PATCH_SAVE bam_name "%BASH_FOR_RES%"
+      BEGIN
+        REPLACE_TEXTUALLY CASE_INSENSITIVE EVALUATE_REGEXP
+          ~^%spell_name%_~ ~%spell_res%~
+      END
+
+      COPY_LARGE ~%BASH_FOR_FILESPEC%~ ~override/%bam_name%.bam~
+
+      MAKE_PATCH
+        icon=>"%spell_res%c"
+        patch_ability_inline=>~ability_icon=>"%spell_res%b"~
+      END
+
+      ACTION_IF FILE_EXISTS_IN_GAME "%spell_res%.spl"
+      BEGIN
+        LAUNCH_ACTION_FUNCTION edit_spell
+          STR_VAR
+          spell	= "%spell_res%"
+          edits	= "patch_data"
+        END
+      END
+      ELSE
+      BEGIN
+        LAUNCH_ACTION_FUNCTION log_this
+          STR_VAR
+	  file		= "spells_missing.txt"
+          input		= "%spell_name% in spell.ids as %spell_num% but %spell_res%.spl not found"
+	  repeat	= "no"
+        END
+      END
+    END
+    ELSE
+    BEGIN
+      LAUNCH_ACTION_FUNCTION log_this
+        STR_VAR
+	file	= "iwd_icons_skipped.txt"
+        input	= "%spell_name% not found in game, skipping"
+	repeat	= "no"
+      END
+    END
+  END
+END	// install_spell_icons
+
+

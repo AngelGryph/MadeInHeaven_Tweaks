@@ -1,0 +1,109 @@
+// Made in heaven: Tweaks
+//
+// WeiDU installer
+
+BACKUP "weidu_external/backup/mih_tweaks"
+
+AUTHOR "angel@pearlgates.net"
+VERSION "v1"
+
+//MODDER setup_tra none area_variables warn missing_extern warn missing_resref warn ict2_actions none missing_eval none overwriting_file none fun_args warn
+
+ASK_EVERY_COMPONENT
+NO_IF_EVAL_BUG
+AUTO_EVAL_STRINGS
+
+ALWAYS
+  INCLUDE "mih_eq/lib/always.tpa"
+END	// ALWAYS block
+
+
+LANGUAGE "English"
+         "english"
+	 "mih_tweaks/language/english/setup-mih_tweaks.tra"
+	 "weidu_external/lang/mih_tweaks/english/setup-mih_tweaks.tra"
+
+
+// Cap charges of wands and staves
+
+BEGIN @10 
+//GROUP @3 
+
+LAUNCH_ACTION_FUNCTION run
+  STR_VAR
+  file			= "cap_charges"
+  location		= "items"
+END
+
+
+// Spell Level affects Saving Throws
+
+BEGIN @25
+//GROUP @5
+
+LAUNCH_ACTION_FUNCTION run
+  STR_VAR
+  file		= "spell_level_saving_throws"
+  location	= "spells"
+END
+
+
+// IWD-style Spell Icons
+
+BEGIN @2
+
+LAUNCH_ACTION_FUNCTION run
+  STR_VAR
+  file		= "setup_iwd_icons"
+  location	= "spells"
+END
+
+
+// Adjust XP Rewards
+
+BEGIN @1
+
+LAUNCH_ACTION_FUNCTION run
+  STR_VAR
+  file		= "adjust_xp_rewards"
+  location	= "xp"
+END
+
+
+
+// Revised Strength Table
+
+BEGIN @17
+//GROUP @18
+
+LAUNCH_ACTION_FUNCTION run
+  STR_VAR
+  file		= "revised_strength_table"
+  location	= "stats"
+END
+
+
+// Revised Dexterity Table
+
+BEGIN @19
+//GROUP @18
+
+LAUNCH_ACTION_FUNCTION run
+  STR_VAR
+  file		= "revised_dexterity_table"
+  location	= "stats"
+END
+
+
+// Revised Constitution Table
+
+BEGIN @20
+//GROUP @18
+
+LAUNCH_ACTION_FUNCTION run
+  STR_VAR
+  file		= "revised_constitution_table"
+  location	= "stats"
+END
+
+
