@@ -1,0 +1,98 @@
+DEFINE_ACTION_FUNCTION alt_damage_large
+BEGIN
+  COPY + "%MOD_FOLDER%/%component_loc%/tables/_alt_dam.2da" "override"
+
+  COPY_EXISTING_REGEXP "^.*\.itm$" "override"
+    LAUNCH_PATCH_FUNCTION ITM_read_category
+      RET
+      item_type		= value
+    END
+
+    LAUNCH_PATCH_FUNCTION ITM_read_proficiency_code
+      RET
+      proficiency	= value
+    END
+
+    SET found = 0
+
+    INNER_PATCH_FILE "_alt_dam.2da"
+    BEGIN
+      COUNT_2DA_COLS cols
+      COUNT_2DA_ROWS cols rows
+
+      FOR (SET i = 0; i < rows; ++i)
+      BEGIN
+        READ_2DA_ENTRY i 1 cols match_type
+        READ_2DA_ENTRY i 2 cols match_prof
+
+	PATCH_IF item_type == match_type AND
+	 (match_prof == 0 OR proficiency == match_prof)
+	BEGIN
+	  SET found = 1
+
+          READ_2DA_ENTRY i 3 cols alt_dicenum
+          READ_2DA_ENTRY i 4 cols alt_dicesize
+          READ_2DA_ENTRY i 5 cols alt_bonus
+	END
+      END
+    END
+
+    PATCH_IF found
+    BEGIN
+      PATCH_MAKE_PATCH
+        patch_ability_inline=>~match=>"ability_type = 1" alt_dicenum=>"%alt_dicenum%" alt_dicesize=>"%alt_dicesize%" alt_bonus=>"%alt_bonus% + enchantment"~
+      END
+
+      LAUNCH_PATCH_FUNCTION apply_patches
+        STR_VAR
+        file_ext	= "ITM"
+        edits	= "patch_data"
+      END
+    END
+
+    BUT_ONLY_IF_IT_CHANGES
+
+  DELETE + "override/_alt_dam.2da"
+
+
+  COPY - "%MOD_FOLDER%/%component_loc%/tables/alt_item.2da" "%workspace%"
+    COUNT_2DA_COLS cols
+    COUNT_2DA_ROWS cols rows
+
+    FOR (SET i = 0; i < rows; ++i)
+    BEGIN
+      READ_2DA_ENTRY i 0 cols item
+      READ_2DA_ENTRY i 1 cols alt_dicenum
+      READ_2DA_ENTRY i 2 cols alt_dicesize
+      READ_2DA_ENTRY i 3 cols alt_bonus
+
+      PATCH_IF FILE_EXISTS_IN_GAME "%item%,itm"
+      BEGIN
+        INNER_ACTION
+        BEGIN
+          MAKE_PATCH
+            patch_ability_inline=>~match=>"ability_type = 1" alt_dicenum=>"%alt_dicenum%" alt_dicesize=>"%alt_dicesize%" alt_bonus=>"%alt_bonus% + enchantment"~
+	  END
+
+	  LAUNCH_ACTION_FUNCTION edit_item
+	    STR_VAR
+	    item
+	    edits	= "patch_data"
+	  END
+        END
+      END
+    END
+
+
+  MAKE_PATCH
+    match=>~race is_in [ankheg basilisk bear carrioncrawler gnoll ogre spider wyvern demonic beholder otyugh troll umberhulk giant golem elemental dragon minotaur drider shambling_mound chimera yeti treant ettin]~
+    use_alt_damage=>1
+  END
+
+  LAUNCH_ACTION_FUNCTION edit_all_creatures
+    STR_VAR
+    edits	= "patch_data"
+  END
+END	// alt_damage_large
+
+
