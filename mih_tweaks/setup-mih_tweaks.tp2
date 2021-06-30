@@ -62,6 +62,19 @@ LAUNCH_ACTION_FUNCTION run
 END
 
 
+// Protection from Evil blocks Domination
+
+BEGIN @8
+//GROUP @5
+
+LAUNCH_ACTION_FUNCTION run
+  STR_VAR
+  file		= "pfe_blocks_domination"
+  tra		= "spell_tweaks"
+  location	= "spells"
+END
+
+
 // IWD-style Spell Icons
 
 BEGIN @2
