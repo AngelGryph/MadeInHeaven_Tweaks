@@ -79,6 +79,8 @@ END
 
 BEGIN @2
 
+DEPRECATED ~Not ready yet.~
+
 LAUNCH_ACTION_FUNCTION run
   STR_VAR
   file		= "setup_iwd_icons"
