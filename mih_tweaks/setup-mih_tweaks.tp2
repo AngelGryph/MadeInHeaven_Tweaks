@@ -27,7 +27,6 @@ LANGUAGE "English"
 // Alternative Damage on Large Creatures
 
 BEGIN @5
-//GROUP @3 
 
 REQUIRE_PREDICATE NOT GAME_IS "iwd" @4 
 
@@ -41,7 +40,6 @@ END
 // Cap charges of wands and staves
 
 BEGIN @10 
-//GROUP @3 
 
 LAUNCH_ACTION_FUNCTION run
   STR_VAR
@@ -95,9 +93,19 @@ BEGIN @1
 LAUNCH_ACTION_FUNCTION run
   STR_VAR
   file		= "adjust_xp_rewards"
-  location	= "xp"
+  location	= "challenge"
 END
 
+
+// Give Monsters Bonus HP
+
+BEGIN @3
+
+LAUNCH_ACTION_FUNCTION run
+  STR_VAR
+  file		= "monster_bonus_hp"
+  location	= "challenge"
+END
 
 
 // Revised Strength Table

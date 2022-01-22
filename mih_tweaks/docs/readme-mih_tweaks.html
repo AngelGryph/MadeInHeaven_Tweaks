@@ -67,6 +67,11 @@ Made in Heaven: Encounters &amp; Quests is packaged and installed with WeiDU and
   With this modification, characters under a Protection from Evil affect can no longer be dominated by someone else's will.  This will block spells like Domination and Mental Domination, as well as a vampire's gaze.  Note that it does not block Charm-type spells as these merely twist a character's perception of friend and foe instead of crushing their will.  So Charm Person and Dire Charm will not be blocked.</p>
   <p><strong>Spell Level affects Saving Throws</strong><br/>
   Under second edition rules, a first level spell has the same saving throw as a ninth level one.  In third edition rules, the spell's level factors in the saving throw against it.  This modification implements that rule; all arcane and divine spells that have saving throws will now have a penalty to the roll equal to the spell level.  If the spell already had a flat penalty, the two will be cumulative.  So a fifth level spell that forces its target to save vs. spell at -2 will instead force them to save at -7.  This makes high-level spells quite dangerous even to high-level characters.</p>
+  <h3>Challenge Tweaks</h3>
+  <p><strong>Adjust XP Rewards</strong><br/>
+  If you have a lot of mods installed that provide new encounters and quests, you might find your experience rising much faster than normal.  This tweak allows you to tone down the experience rewards for monsters and quests.  The percentage can be adjusted in the ini file (default 50%).</p>
+  <p><strong>Give Monsters Bonus HP</strong><br/>
+  This component provides a number of bonus hit points to certain monsters, making them tougher than usual.  The exact number scales with the square of their HD (level1 squared times ratio/100), making later monsters tougher to be more of a challenge to a high-level party.  The ratio for different monster types can be adjusted in the ini file.</p>
   <h3>Game Rule Tweaks</h3>
   <p><strong>Revised Strength Table</strong><br/>
   This patches the tables associated with strength to be more like 3.5e.  Bonuses start at 12 instead of 16 and the effects of exceptional strength are towned down a notch.</p>
@@ -162,6 +167,7 @@ Made in Heaven: Encounters &amp; Quests is packaged and installed with WeiDU and
   <p><strong>Version 2 - ???</strong></p>
   <ul>
     <li>Added missing language/iconv folder, this fixes an install issue on Windows.</li>
+    <li>Added component "Give Monsters Bonus HP".</li>
   </ul>
   <p><strong>Version 1 - August 2021</strong></p>
   <ul>
