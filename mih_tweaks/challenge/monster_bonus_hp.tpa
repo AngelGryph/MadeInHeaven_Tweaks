@@ -49,7 +49,7 @@ BEGIN
     BEGIN
       PATCH_MAKE_PATCH
         var_bonus_hp=>"(level1 * level1 * %bonus_hp_ratio%) / 100"
-	hp_current=>"if (hp_current == hp_max) then (hp_current + bonus_hp) else no_change"
+	hp_current=>"hp_current + bonus_hp"
 	hp_max=>"hp_max + bonus_hp"
       END
 
