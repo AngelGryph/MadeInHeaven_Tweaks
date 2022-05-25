@@ -1,0 +1,23 @@
+DEFINE_ACTION_FUNCTION dismissable_spells
+BEGIN
+  // Dismiss summoning spells
+
+  LAUNCH_ACTION_FUNCTION install
+    STR_VAR
+    file	= "mh#unsum.bam"
+    editstring	= "say_name=>0"
+  END
+
+  LAUNCH_ACTION_FUNCTION install_spell
+    STR_VAR
+    spell	= "mh#unsum"
+    editstring	= "say_name=>0"
+  END
+    
+  LAUNCH_ACTION_FUNCTION edit_all_creatures
+    STR_VAR
+    editstring	= ~match=>"gender = summoned" add_spells=>"mh#unsum"~
+  END
+END	// dismissable_spells
+
+

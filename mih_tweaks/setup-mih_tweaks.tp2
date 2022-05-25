@@ -27,6 +27,7 @@ LANGUAGE "English"
 // Alternative Damage on Large Creatures
 
 BEGIN @5
+GROUP @11
 
 REQUIRE_PREDICATE NOT GAME_IS "iwd" @4 
 
@@ -40,6 +41,7 @@ END
 // Cap charges of wands and staves
 
 BEGIN @10 
+GROUP @11
 
 LAUNCH_ACTION_FUNCTION run
   STR_VAR
@@ -50,8 +52,8 @@ END
 
 // Spell Level affects Saving Throws
 
-BEGIN @25
-//GROUP @5
+BEGIN @9
+GROUP @6
 
 LAUNCH_ACTION_FUNCTION run
   STR_VAR
@@ -63,7 +65,7 @@ END
 // Protection from Evil blocks Domination
 
 BEGIN @8
-//GROUP @5
+GROUP @6
 
 LAUNCH_ACTION_FUNCTION run
   STR_VAR
@@ -73,9 +75,23 @@ LAUNCH_ACTION_FUNCTION run
 END
 
 
+// Dismissable Spells
+
+BEGIN @7
+GROUP @6
+
+LAUNCH_ACTION_FUNCTION run
+  STR_VAR
+  file		= "dismissable_spells"
+  location	= "spells"
+  tra		= "spell_tweaks"
+END
+
+
 // IWD-style Spell Icons
 
 BEGIN @2
+GROUP @6
 
 DEPRECATED ~Not ready yet.~
 
@@ -89,6 +105,7 @@ END
 // Adjust XP Rewards
 
 BEGIN @1
+GROUP @12
 
 LAUNCH_ACTION_FUNCTION run
   STR_VAR
@@ -100,6 +117,7 @@ END
 // Give Monsters Bonus HP
 
 BEGIN @3
+GROUP @12
 
 LAUNCH_ACTION_FUNCTION run
   STR_VAR
@@ -111,7 +129,7 @@ END
 // Revised Strength Table
 
 BEGIN @17
-//GROUP @18
+GROUP @18
 
 LAUNCH_ACTION_FUNCTION run
   STR_VAR
@@ -123,7 +141,7 @@ END
 // Revised Dexterity Table
 
 BEGIN @19
-//GROUP @18
+GROUP @18
 
 LAUNCH_ACTION_FUNCTION run
   STR_VAR
@@ -135,7 +153,7 @@ END
 // Revised Constitution Table
 
 BEGIN @20
-//GROUP @18
+GROUP @18
 
 LAUNCH_ACTION_FUNCTION run
   STR_VAR

@@ -2,30 +2,30 @@ DEFINE_ACTION_FUNCTION monster_bonus_hp
 BEGIN
   LAUNCH_ACTION_FUNCTION check_ini
     STR_VAR
-    ini		= "bonus_hp_ratio_animal"
+    ini		= "bonus_hp_per_hd_animal"
     RET
-    bonus_hp_ratio_animal	= value
+    bonus_hp_per_hd_animal	= value
   END
 
   LAUNCH_ACTION_FUNCTION check_ini
     STR_VAR
-    ini		= "bonus_hp_ratio_undead"
+    ini		= "bonus_hp_per_hd_undead"
     RET
-    bonus_hp_ratio_undead	= value
+    bonus_hp_per_hd_undead	= value
   END
 
   LAUNCH_ACTION_FUNCTION check_ini
     STR_VAR
-    ini		= "bonus_hp_ratio_gianthumanoid"
+    ini		= "bonus_hp_per_hd_gianthumanoid"
     RET
-    bonus_hp_ratio_gianthumanoid	= value
+    bonus_hp_per_hd_gianthumanoid	= value
   END
 
   LAUNCH_ACTION_FUNCTION check_ini
     STR_VAR
-    ini		= "bonus_hp_ratio_monster"
+    ini		= "bonus_hp_per_hd_monster"
     RET
-    bonus_hp_ratio_monster	= value
+    bonus_hp_per_hd_monster	= value
   END
 
   COPY_EXISTING_REGEXP ".+\.cre$" "override"
@@ -36,19 +36,19 @@ BEGIN
 
     TO_LOWER general
 
-    PATCH_IF VARIABLE_IS_SET "bonus_hp_ratio_%general%"
+    PATCH_IF VARIABLE_IS_SET "bonus_hp_per_hd_%general%"
     BEGIN
-      SET bonus_hp_ratio = EVAL "%bonus_hp_ratio_%general%%"
+      SET bonus_hp_per_hd = EVAL "%bonus_hp_per_hd_%general%%"
     END
     ELSE
     BEGIN
-      SET bonus_hp_ratio = 0
+      SET bonus_hp_per_hd = 0
     END
 
-    PATCH_IF bonus_hp_ratio > 0
+    PATCH_IF bonus_hp_per_hd > 0
     BEGIN
       PATCH_MAKE_PATCH
-        var_bonus_hp=>"(level1 * level1 * %bonus_hp_ratio%) / 100"
+        var_bonus_hp=>"level1 * %bonus_hp_per_hd%"
 	hp_current=>"hp_current + bonus_hp"
 	hp_max=>"hp_max + bonus_hp"
       END

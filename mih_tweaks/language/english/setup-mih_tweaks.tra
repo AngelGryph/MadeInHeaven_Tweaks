@@ -4,16 +4,18 @@
 @3    = ~Give Monsters Bonus HP~
 @4    = ~This component is not applicable to your game.~
 @5    = ~Alternative Damage on Large Creatures~
-
+@6    = ~Spell Tweaks~
+@7    = ~Dismissable Spells~
 @8    = ~Protection from Evil blocks Domination~
-
+@9    = ~Spell Level affects Saving Throws~
 @10   = ~Cap charges of Wands and Staves~
+@11   = ~Item Tweaks~
+@12   = ~Challenge Tweaks~
 
 @17   = ~Revised Strength Table~
-//@18   = ~Game Rule Tweaks~
+@18   = ~Game Rule Tweaks~
 @19   = ~Revised Dexterity Table~
 @20   = ~Revised Constitution Table~
 
-@25   = ~Spell Level affects Saving Throws~
 
 
