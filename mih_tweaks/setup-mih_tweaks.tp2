@@ -22,6 +22,12 @@ LANGUAGE "English"
          "english"
 	 "mih_tweaks/language/english/setup-mih_tweaks.tra"
 	 "weidu_external/lang/mih_tweaks/english/setup-mih_tweaks.tra"
+LANGUAGE "French (deratiseur)"
+         "french"
+	 "mih_tweaks/language/english/setup-mih_tweaks.tra"
+	 "weidu_external/lang/mih_tweaks/english/setup-mih_tweaks.tra"
+	 "mih_tweaks/language/french/setup-mih_tweaks.tra"
+	 "weidu_external/lang/mih_tweaks/french/setup-mih_tweaks.tra"
 
 
 // Alternative Damage on Large Creatures
