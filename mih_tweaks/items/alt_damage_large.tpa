@@ -55,7 +55,7 @@ BEGIN
   DELETE + "override/_alt_dam.2da"
 
 
-  COPY - "%MOD_FOLDER%/%component_loc%/tables/alt_item.2da" "%workspace%"
+  COPY - "%MOD_FOLDER%/%component_loc%/tables/_alt_item.2da" "%workspace%"
     COUNT_2DA_COLS cols
     COUNT_2DA_ROWS cols rows
 
@@ -66,7 +66,7 @@ BEGIN
       READ_2DA_ENTRY i 2 cols alt_dicesize
       READ_2DA_ENTRY i 3 cols alt_bonus
 
-      PATCH_IF FILE_EXISTS_IN_GAME "%item%,itm"
+      PATCH_IF FILE_EXISTS_IN_GAME "%item%.itm"
       BEGIN
         INNER_ACTION
         BEGIN
