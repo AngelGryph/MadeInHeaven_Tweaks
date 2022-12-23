@@ -108,18 +108,6 @@ LAUNCH_ACTION_FUNCTION run
 END
 
 
-// Adjust XP Rewards
-
-BEGIN @1
-GROUP @12
-
-LAUNCH_ACTION_FUNCTION run
-  STR_VAR
-  file		= "adjust_xp_rewards"
-  location	= "challenge"
-END
-
-
 // Give Monsters Bonus HP
 
 BEGIN @3

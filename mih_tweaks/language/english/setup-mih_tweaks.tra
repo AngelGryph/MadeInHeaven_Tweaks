@@ -1,5 +1,5 @@
 @0    = ~dummy~
-@1    = ~Adjust XP Rewards~
+//@1    = ~~
 @2    = ~IWD-style Spell Icons~
 @3    = ~Give Monsters Bonus HP~
 @4    = ~This component is not applicable to your game.~
@@ -16,6 +16,5 @@
 @18   = ~Game Rule Tweaks~
 @19   = ~Revised Dexterity Table~
 @20   = ~Revised Constitution Table~
-
 
 
