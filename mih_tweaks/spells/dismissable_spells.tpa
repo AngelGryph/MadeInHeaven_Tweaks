@@ -18,6 +18,29 @@ BEGIN
     STR_VAR
     editstring	= ~match=>"gender = summoned" add_spells=>"mh#unsum"~
   END
+
+
+  // Dismiss spells that create weapons
+
+  MAKE_PATCH
+    add_ability_inline=>~at_end=>1 ability_type=>3 ability_icon_loc=>3 ability_icon=>icon ability_target=>5 speed=>1 projectile=>1~
+    add_effect_inline=>~match=>"ability_type = 3" opcode=>112 target=>1 timing=>1 resource=>filename~
+  END
+
+  LAUNCH_ACTION_FUNCTION edit_item
+    INT_VAR
+    allow_missing	= 1
+    STR_VAR
+    item	= "eneblade fblade melfmet shammr shammr2 shammr3"
+    edits	= "patch_data"
+  END
+
+  OUTER_SET str_ref = RESOLVE_STR_REF(@0)
+
+  ACTION_FOR_EACH item IN "eneblade" "fblade" "melfmet" "shammr" "shammr2 shammr3"
+  BEGIN
+    APPEND "tooltip.2da" "%item%	-1	%str_ref%	-1" UNLESS "^%item%"
+  END
 END	// dismissable_spells
 
 

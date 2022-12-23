@@ -13,8 +13,8 @@
   <p><strong><a href="http://www.gibberlings3.net/">A Gibberlings Three Mod</a></strong> <br/>
     <strong>Author</strong>: <a href="https://www.gibberlings3.net/profile/6180-angel/">Angel</a> </p>
 <!--  <p><strong>On the web: </strong><a href="http://www.gibberlings3.net/npcstrongholds/"><strong>Home page</strong></a> and <a href="http://gibberlings3.net/forums/index.php?showforum=77"><strong>discussion forum</strong></a></p> -->
-  <p><strong>Version 2 - <a href="http://www.gibberlings3.net/downloads/#mih_tweaks">Check for the most recent version</a></strong> <br/>
-    <strong>Languages: </strong>English <br/>
+  <p><strong>Version 2 - <a href="http://https://github.com/AngelGryph/MadeInHeaven_Tweaks/releases">Check for the most recent version</a></strong> <br/>
+    <strong>Languages: </strong>English French<br/>
     <strong>Platforms: </strong>Windows, Mac OS X, and Linux </p>
 </div>
 <h2>Overview</h2>
@@ -60,16 +60,27 @@ Made in Heaven: Encounters &amp; Quests is packaged and installed with WeiDU and
   <p><strong>Alternative Damage on Large Creatures</strong><br/>
   An unused feature of the engine is to have weapons use an alternative damage dice roll on creatures with BIT13 set in their creature flags.  This tweak uses this feature to implement the rule that certain weapons do more (swords, most large weapons) or less (most small weapons) damage on creatures larger than a human.</p>
   <p>Warning: Items enhanced by this tweak should not be edited in DLTCEP as DLTCEP has a bug that wipes the alternative damage dice from the item upon saving.  I have not tested this in Near Infinity.</p>
+
   <p><strong>Cap Charges of Wands and Staves</strong><br/>
   This modification caps the maximum number of charges of wands to 6 and staves to 12.  Other items operating on charges are not affected.  The values can be tweaked in the .ini file.</p>
+
   <h3>Spell Tweaks</h3>
   <p><strong>Protection from Evil blocks Domination</strong><br/>
   With this modification, characters under a Protection from Evil affect can no longer be dominated by someone else's will.  This will block spells like Domination and Mental Domination, as well as a vampire's gaze.  Note that it does not block Charm-type spells as these merely twist a character's perception of friend and foe instead of crushing their will.  So Charm Person and Dire Charm will not be blocked.</p>
+
   <p><strong>Spell Level affects Saving Throws</strong><br/>
   Under second edition rules, a first level spell has the same saving throw as a ninth level one.  In third edition rules, the spell's level factors in the saving throw against it.  This modification implements that rule; all arcane and divine spells that have saving throws will now have a penalty to the roll equal to the spell level.  If the spell already had a flat penalty, the two will be cumulative.  So a fifth level spell that forces its target to save vs. spell at -2 will instead force them to save at -7.  This makes high-level spells quite dangerous even to high-level characters.</p>
+
+  <p><strong>Dismissable Spells (BETA)</strong><br/>
+  This component lets magic users dismiss some of their own spells at will.</p>
+  <p>Summoned monsters (but not gated ones like fiends and celestials) now have a <i>Dismiss</i> button in their special ability tab.</p>
+  <p>Weapons created by spells, like <i>Flame Blade</i> and <i>Melf's Minute Meteors</i> now add a special ability that allows dismissing the created weapon.  This currently only works for <i>Flame Blade, Spiritual Hammer, Melf's Minute Meteors</i> and <i>Energy Blades</i></p>
+  <p>This component is still in beta, use at your own risk.</p>
+
   <h3>Challenge Tweaks</h3>
   <p><strong>Give Monsters Bonus HP</strong><br/>
   This component provides a number of bonus hit points to certain monsters, making them tougher than usual.  The exact number scales with the square of their HD (level1 squared times ratio/100), making later monsters tougher to be more of a challenge to a high-level party.  The ratio for different monster types can be adjusted in the ini file.</p>
+
   <h3>Game Rule Tweaks</h3>
   <p><strong>Revised Strength Table</strong><br/>
   This patches the tables associated with strength to be more like 3.5e.  Bonuses start at 12 instead of 16 and the effects of exceptional strength are towned down a notch.</p>
@@ -162,9 +173,10 @@ Made in Heaven: Encounters &amp; Quests is packaged and installed with WeiDU and
 </div>
 <h2>Version History</h2>
 <div class="section">
-  <p><strong>Version 2 - ???</strong></p>
+  <p><strong>Version 2 - December 23 2022</strong></p>
   <ul>
     <li>Added missing language/iconv folder, this fixes an install issue on Windows.</li>
+    <li>Added component "Dismissable Spells".</li>
     <li>Added component "Give Monsters Bonus HP".</li>
     <li>Added French translation by deratiseur.</li>
   </ul>

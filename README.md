@@ -8,8 +8,9 @@ A collection of tweaks for Baldur's Gate 1 and 2.
 
 ## Version History
 
-Version 2 - ???
+Version 2 - December 23 2022
 - Added missing language/iconv folder, this fixes install issues on Windows
+- Added new component "Dismissable Spells"
 - Added new component "Give Monsters Bonus HP"
 - Added French translation by deratiseur
 
