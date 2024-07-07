@@ -3,16 +3,7 @@ BEGIN
   COPY + "%MOD_FOLDER%/%component_loc%/tables/_alt_dam.2da" "override"
 
   COPY_EXISTING_REGEXP "^.*\.itm$" "override"
-    LAUNCH_PATCH_FUNCTION ITM_read_category
-      RET
-      item_type		= value
-    END
-
-    LAUNCH_PATCH_FUNCTION ITM_read_proficiency_code
-      RET
-      proficiency	= value
-    END
-
+    LPF struct_read RET_ARRAY m = struct END
     SET found = 0
 
     INNER_PATCH_FILE "_alt_dam.2da"
@@ -22,11 +13,11 @@ BEGIN
 
       FOR (SET i = 0; i < rows; ++i)
       BEGIN
-        READ_2DA_ENTRY i 1 cols match_type
+        READ_2DA_ENTRY i 1 cols match_cat
         READ_2DA_ENTRY i 2 cols match_prof
 
-	PATCH_IF item_type == match_type AND
-	 (match_prof == 0 OR proficiency == match_prof)
+        PATCH_IF m_category = match_cat AND (match_prof = 0
+       	      OR IDS_OF_SYMBOL("stats" "%m_proficiency%") = match_prof)
 	BEGIN
 	  SET found = 1
 
@@ -39,15 +30,8 @@ BEGIN
 
     PATCH_IF found
     BEGIN
-      PATCH_MAKE_PATCH
-        patch_ability_inline=>~match=>"ability_type = 1" alt_dicenum=>"%alt_dicenum%" alt_dicesize=>"%alt_dicesize%" alt_bonus=>"%alt_bonus% + enchantment"~
-      END
-
-      LAUNCH_PATCH_FUNCTION apply_patches
-        STR_VAR
-        file_ext	= "ITM"
-        edits	= "patch_data"
-      END
+      m.ab.alter{s_alternate_dicenumber = alt_dicenum;;s_alternate_dicesize = alt_dicesize;;s_alternate_damagebonus = alt_bonus + m_enchantment|match=~"%s_type%" == "melee"~}
+      LPF struct_write STR_VAR struct = "m" END
     END
 
     BUT_ONLY_IF_IT_CHANGES
@@ -70,29 +54,25 @@ BEGIN
       BEGIN
         INNER_ACTION
         BEGIN
-          MAKE_PATCH
-            patch_ability_inline=>~match=>"ability_type = 1" alt_dicenum=>"%alt_dicenum%" alt_dicesize=>"%alt_dicesize%" alt_bonus=>"%alt_bonus% + enchantment"~
-	  END
-
-	  LAUNCH_ACTION_FUNCTION edit_item
-	    STR_VAR
-	    item
-	    edits	= "patch_data"
-	  END
+	  itm.edit["%item%"]
+	  [
+            m.ab.alter{s_alternate_dicenumber = alt_dicenum;;s_alternate_dicesize = alt_dicesize;;s_alternate_damagebonus = alt_bonus + m_enchantment|match=~"%s_type%" == "melee"~}
+	  ]
         END
       END
     END
 
 
-  MAKE_PATCH
-    match=>~race is_in [ankheg basilisk bear carrioncrawler gnoll ogre spider wyvern demonic beholder otyugh troll umberhulk giant golem elemental dragon minotaur drider shambling_mound chimera yeti treant ettin]~
-    use_alt_damage=>1
-  END
+  COPY_EXISTING_REGEXP "^.+\.cre$" "override"
+    LPF struct_read RET_ARRAY m = struct END
+    
+    PATCH_IF INDEX(CASE_INSENSITIVE EXACT_MATCH "%m_race%" "ankheg basilisk bear carrioncrawler gnoll ogre spider wyvern demonic beholder otyugh troll umberhulk giant golem elemental dragon minotaur drider shambling_mound chimera yeti treant ettin") != "-1"
+    BEGIN
+      m_bit_13 = 1
+      LPF struct_write STR_VAR struct = "m" END
+    END
 
-  LAUNCH_ACTION_FUNCTION edit_all_creatures
-    STR_VAR
-    edits	= "patch_data"
-  END
+    BUT_ONLY_IF_IT_CHANGES
 END	// alt_damage_large
 
 

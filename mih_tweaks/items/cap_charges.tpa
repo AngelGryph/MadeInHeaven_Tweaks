@@ -15,8 +15,8 @@ BEGIN
   END
 
 
-  // Keeping this in WeiDU for now.
-  // I have no idea how to do it in SFO.
+  // I could rewrite this in SFO2e, but this code already
+  // works just fine so why bother?
 
   COPY_EXISTING_REGEXP ".+\.itm" "override"
     PATCH_MATCH SHORT_AT (0x01c)

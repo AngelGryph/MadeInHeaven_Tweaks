@@ -33,7 +33,6 @@ LANGUAGE "French (deratiseur)"
 // Alternative Damage on Large Creatures
 
 BEGIN @5
-DESIGNATED 105
 GROUP @11
 
 REQUIRE_PREDICATE NOT GAME_IS "iwd" @4 
@@ -48,7 +47,6 @@ END
 // Cap charges of wands and staves
 
 BEGIN @10 
-DESIGNATED 110
 GROUP @11
 
 LAUNCH_ACTION_FUNCTION run
@@ -61,7 +59,6 @@ END
 // Spell Level affects Saving Throws
 
 BEGIN @9
-DESIGNATED 109
 GROUP @6
 
 LAUNCH_ACTION_FUNCTION run
@@ -74,7 +71,6 @@ END
 // Protection from Evil blocks Domination
 
 BEGIN @8
-DESIGNATED 108
 GROUP @6
 
 LAUNCH_ACTION_FUNCTION run
@@ -88,7 +84,6 @@ END
 // Dismissable Spells
 
 BEGIN @7
-DESIGNATED 107
 GROUP @6
 
 LAUNCH_ACTION_FUNCTION run
@@ -102,7 +97,6 @@ END
 // IWD-style Spell Icons
 
 BEGIN @2
-DESIGNATED 102
 GROUP @6
 
 DEPRECATED ~Not ready yet.~
@@ -117,7 +111,6 @@ END
 // Give Monsters Bonus HP
 
 BEGIN @3
-DESIGNATED 103
 GROUP @12
 
 LAUNCH_ACTION_FUNCTION run
@@ -130,39 +123,36 @@ END
 // Revised Strength Table
 
 BEGIN @17
-DESIGNATED 117
 GROUP @18
 
 LAUNCH_ACTION_FUNCTION run
   STR_VAR
   file		= "revised_strength_table"
-  location	= "stats"
+  location	= "rules"
 END
 
 
 // Revised Dexterity Table
 
 BEGIN @19
-DESIGNATED 119
 GROUP @18
 
 LAUNCH_ACTION_FUNCTION run
   STR_VAR
   file		= "revised_dexterity_table"
-  location	= "stats"
+  location	= "rules"
 END
 
 
 // Revised Constitution Table
 
 BEGIN @20
-DESIGNATED 120
 GROUP @18
 
 LAUNCH_ACTION_FUNCTION run
   STR_VAR
   file		= "revised_constitution_table"
-  location	= "stats"
+  location	= "rules"
 END
 
 

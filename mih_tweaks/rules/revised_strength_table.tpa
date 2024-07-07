@@ -1,0 +1,37 @@
+DEFINE_ACTION_FUNCTION revised_strength_table
+BEGIN
+  COPY_EXISTING "strmod.2da" "override"
+    LPF 2da_read STR_VAR type = "2da" RET_ARRAY str_table = array END
+
+    FOR (i = 12; i <= 18; ++i)
+    BEGIN
+      SET $str_table("%i%" "TO_HIT") = (i - 11) / 2
+      SET $str_table("%i%" "DAMAGE") = (i - 10) / 2
+    END
+
+    FOR (i = 19; i <= 25; ++i)
+    BEGIN
+      SET $str_table("%i%" "TO_HIT") = (i - 7) / 2
+      SET $str_table("%i%" "DAMAGE") = (i - 6) / 2
+    END
+
+    LPF 2da_write STR_VAR type = "2da" array = "str_table" END
+    PRETTY_PRINT_2DA
+    BUT_ONLY_IF_IT_CHANGES
+
+
+  COPY_EXISTING "strmodex.2da" "override"
+    LPF 2da_read STR_VAR type = "2da" RET_ARRAY strex_table = array END
+
+    FOR (i = 0; i <= 100; ++i)
+    BEGIN
+      SET $str_table("%i%" "TO_HIT") = (i + 25) / 50
+      SET $str_table("%i%" "DAMAGE") = (i - 00) / 50
+    END
+
+    LPF 2da_write STR_VAR type = "2da" array = "strex_table" END
+    PRETTY_PRINT_2DA
+    BUT_ONLY_IF_IT_CHANGES
+END	// revised_strength_table
+
+

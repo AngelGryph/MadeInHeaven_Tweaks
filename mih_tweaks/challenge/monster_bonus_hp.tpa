@@ -29,35 +29,20 @@ BEGIN
   END
 
   COPY_EXISTING_REGEXP ".+\.cre$" "override"
-    LAUNCH_PATCH_FUNCTION CRE_read_general
-      RET
-      general	= value
-    END
+    LPF struct_read RET_ARRAY m = struct END
 
-    TO_LOWER general
+    TO_LOWER m_general
 
-    PATCH_IF VARIABLE_IS_SET "bonus_hp_per_hd_%general%"
+    PATCH_IF VARIABLE_IS_SET "bonus_hp_per_hd_%m_general%"
     BEGIN
-      SET bonus_hp_per_hd = EVAL "%bonus_hp_per_hd_%general%%"
-    END
-    ELSE
-    BEGIN
-      SET bonus_hp_per_hd = 0
-    END
-
-    PATCH_IF bonus_hp_per_hd > 0
-    BEGIN
-      PATCH_MAKE_PATCH
-        var_bonus_hp=>"level1 * %bonus_hp_per_hd%"
-	hp_current=>"hp_current + bonus_hp"
-	hp_max=>"hp_max + bonus_hp"
+      m_hp_max += EVAL "%bonus_hp_per_hd_%m_general%%" * m_level1
+      
+      PATCH_IF m_hp_current > 0
+      BEGIN
+        m_hp_current += EVAL "%bonus_hp_per_hd_%m_general%%" * m_level1
       END
 
-      LAUNCH_PATCH_FUNCTION apply_patches
-        STR_VAR
-	file_ext	= "CRE"
-	edits		= "patch_data"
-      END
+      LPF struct_write STR_VAR struct = "m" END
     END
 
     BUT_ONLY_IF_IT_CHANGES

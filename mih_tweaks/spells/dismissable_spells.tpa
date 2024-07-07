@@ -2,43 +2,37 @@ DEFINE_ACTION_FUNCTION dismissable_spells
 BEGIN
   // Dismiss summoning spells
 
-  LAUNCH_ACTION_FUNCTION install
-    STR_VAR
-    file	= "mh#unsum.bam"
-    editstring	= "say_name=>0"
-  END
+  COPY_LARGE "%MOD_FOLDER%/%component_loc%/mh#unsum.bam" "override"
 
-  LAUNCH_ACTION_FUNCTION install_spell
-    STR_VAR
-    spell	= "mh#unsum"
-    editstring	= "say_name=>0"
-  END
+  spl.copy[mh#unsum|source_path="%MOD_FOLDER%/%component_loc%"]
+  [
+    m_name := @0
+  ]
     
-  LAUNCH_ACTION_FUNCTION edit_all_creatures
-    STR_VAR
-    editstring	= ~match=>"gender = summoned" add_spells=>"mh#unsum"~
-  END
+  COPY_EXISTING_REGEXP "^.+\.cre$" "override"
+    LPF struct_read RET_ARRAY m = struct END
+    
+    PATCH_IF ("%m_gender%" == "summoned")
+    BEGIN
+      m.cre_add_spells{"mh#unsum"}
+      LPF struct_write STR_VAR struct = "m" END
+    END
+
+    BUT_ONLY_IF_IT_CHANGES
 
 
   // Dismiss spells that create weapons
 
-  MAKE_PATCH
-    add_ability_inline=>~at_end=>1 ability_type=>3 ability_icon_loc=>3 ability_icon=>icon ability_target=>5 speed=>1 projectile=>1~
-    add_effect_inline=>~match=>"ability_type = 3" opcode=>112 target=>1 timing=>1 resource=>filename~
-  END
-
-  LAUNCH_ACTION_FUNCTION edit_item
-    INT_VAR
-    allow_missing	= 1
-    STR_VAR
-    item	= "eneblade fblade melfmet shammr shammr2 shammr3"
-    edits	= "patch_data"
-  END
-
   OUTER_SET str_ref = RESOLVE_STR_REF(@0)
 
-  ACTION_FOR_EACH item IN "eneblade" "fblade" "melfmet" "shammr" "shammr2 shammr3"
+  ACTION_FOR_EACH item IN "eneblade" "fblade" "melfmet" "shammr" "shammr2" "shammr3" "shille"
   BEGIN
+    itm.edit["%item%"|allow_missing:i=1]
+    [
+      m.ab.add{s_type := "magical";;s_location := "item";;s_icon := "%m_icon%";;s_target := "caster";;s_speed = 1;;s_projectile = 1}
+      m.ab_fx.add{s_opcode = 112;;s_target := "self";;s_timing := "instantpermanent";;s_resource := "%SOURCE_RES%"|match_parent=~"%p_type%" == "magical"~}
+    ]
+
     APPEND "tooltip.2da" "%item%	-1	%str_ref%	-1" UNLESS "^%item%"
   END
 END	// dismissable_spells

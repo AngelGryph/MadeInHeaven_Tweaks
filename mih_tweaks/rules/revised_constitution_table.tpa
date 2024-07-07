@@ -1,0 +1,22 @@
+DEFINE_ACTION_FUNCTION revised_constitution_table
+BEGIN
+  COPY_EXISTING "hpconbon.2da" "override"
+    LPF 2da_read STR_VAR type = "2da" RET_ARRAY con_table = array END
+
+    FOR (i = 12; i <= 25; ++i)
+    BEGIN
+      SET $con_table("%i%" "WARRIOR") = (i - 10) / 2
+      SET $con_table("%i%" "OTHER") = (i - 9) / 3
+
+      PATCH_IF i > 18
+      BEGIN
+        SET $con_table("%i%" "MIN_ROLL") = (i - 14) / 2
+      END
+    END
+
+    LPF 2da_write STR_VAR type = "2da" array = "con_table" END
+    PRETTY_PRINT_2DA
+    BUT_ONLY_IF_IT_CHANGES
+END	// revised_constitution_table
+
+

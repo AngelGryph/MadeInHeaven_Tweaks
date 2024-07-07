@@ -1,7 +1,7 @@
 DEFINE_ACTION_FUNCTION pfe_blocks_domination
 BEGIN
   // Leaving this as WeiDU code for now.
-  // Not sure how to do this in SFO.
+  // I could rewrite it in SFO2e but this already works so why bother.
 
   COPY_EXISTING_REGEXP - ".*\.spl" "dummy"
     GET_OFFSET_ARRAY ab_array SPL_V10_HEADERS

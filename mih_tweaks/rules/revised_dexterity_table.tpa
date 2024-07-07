@@ -1,0 +1,18 @@
+DEFINE_ACTION_FUNCTION revised_dexterity_table
+BEGIN
+  COPY_EXISTING "dexmod.2da" "override"
+    LPF 2da_read STR_VAR type = "2da" RET_ARRAY dex_table = array END
+
+    FOR (i = 12; i <= 25; ++i)
+    BEGIN
+      SET $dex_table("%i" "REACTION") = (i - 9) / 3
+      SET $dex_table("%i" "MISSILE") = (i - 10) / 3
+      SET $dex_table("%i" "AC") = 0 - ((i - 11) / 3)
+    END
+
+    LPF 2da_write STR_VAR type = "2da" array = "dex_table" END
+    PRETTY_PRINT_2DA
+    BUT_ONLY_IF_IT_CHANGES
+END	// revised_dexterity_table
+
+

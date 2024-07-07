@@ -1,14 +1,15 @@
 DEFINE_ACTION_FUNCTION spell_level_saving_throws
 BEGIN
-  MAKE_PATCH
-    match=>~spell_type is_in [cleric wizard]~
-    patch_effect_inline=>~match=>"save_vs_spell or save_vs_death or save_vs_polymorph or save_vs_breath or save_vs_wands" save_bonus=>"save_bonus - level"~
-  END
+  COPY_EXISTING_REGEXP "^.+\.spl$" "override"
+    LPF struct_read RET_ARRAY m = struct END
 
-  LAUNCH_ACTION_FUNCTION edit_all_spells
-    STR_VAR
-    edits	= "patch_data"
-  END
+    PATCH_IF INDEX(CASE_INSENSITIVE EXACT_MATCH "%type%" "cleric wizard") != "-1"
+    BEGIN
+      m.ab_fx.alter{s_savebonus -= m_level|match="s_save_vs_spell OR s_save_vs_breath OR s_save_vs_poison OR s_save_vs_wand OR s_save_vs_polymorph"}
+      LPF struct_write STR_VAR struct = "m" END
+    END
+
+    BUT_ONLY_IF_IT_CHANGES
 END	// spell_level_saving_throws
 
 
