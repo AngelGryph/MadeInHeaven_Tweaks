@@ -35,6 +35,8 @@ LANGUAGE "French (deratiseur)"
 BEGIN @5
 GROUP @11
 
+LABEL MH#-MiH_Tweaks-Alt_Damage_Large
+
 REQUIRE_PREDICATE NOT GAME_IS "iwd" @4 
 
 LAUNCH_ACTION_FUNCTION run
@@ -49,6 +51,8 @@ END
 BEGIN @10 
 GROUP @11
 
+LABEL MH#-MiH_Tweaks-Cap_Charges
+
 LAUNCH_ACTION_FUNCTION run
   STR_VAR
   file			= "cap_charges"
@@ -61,6 +65,8 @@ END
 BEGIN @9
 GROUP @6
 
+LABEL MH#-MiH_Tweaks-Spell_Level_Saves
+
 LAUNCH_ACTION_FUNCTION run
   STR_VAR
   file		= "spell_level_saving_throws"
@@ -72,6 +78,8 @@ END
 
 BEGIN @8
 GROUP @6
+
+LABEL MH#-MiH_Tweaks-PFE_Blocks_Domination
 
 LAUNCH_ACTION_FUNCTION run
   STR_VAR
@@ -86,6 +94,8 @@ END
 BEGIN @7
 GROUP @6
 
+LABEL MH#-MiH_Tweaks-Dismissable_Spells
+
 LAUNCH_ACTION_FUNCTION run
   STR_VAR
   file		= "dismissable_spells"
@@ -94,24 +104,12 @@ LAUNCH_ACTION_FUNCTION run
 END
 
 
-// IWD-style Spell Icons
-
-BEGIN @2
-GROUP @6
-
-DEPRECATED ~Not ready yet.~
-
-LAUNCH_ACTION_FUNCTION run
-  STR_VAR
-  file		= "setup_iwd_icons"
-  location	= "spells"
-END
-
-
 // Give Monsters Bonus HP
 
 BEGIN @3
 GROUP @12
+
+LABEL MH#-MiH_Tweaks-Monster_Bonus_HP
 
 LAUNCH_ACTION_FUNCTION run
   STR_VAR
@@ -125,6 +123,8 @@ END
 BEGIN @17
 GROUP @18
 
+LABEL MH#-MiH_Tweaks-Revised_Strength_Table
+
 LAUNCH_ACTION_FUNCTION run
   STR_VAR
   file		= "revised_strength_table"
@@ -137,6 +137,8 @@ END
 BEGIN @19
 GROUP @18
 
+LABEL MH#-MiH_Tweaks-Revised_Dexterity_Table
+
 LAUNCH_ACTION_FUNCTION run
   STR_VAR
   file		= "revised_dexterity_table"
@@ -148,6 +150,8 @@ END
 
 BEGIN @20
 GROUP @18
+
+LABEL MH#-MiH_Tweaks-Revised_Constitution_Table
 
 LAUNCH_ACTION_FUNCTION run
   STR_VAR
