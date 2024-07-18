@@ -1,0 +1,33 @@
+DEFINE_ACTION_FUNCTION more_racial_weapon_affinities
+BEGIN
+  LAUNCH_ACTION_FUNCTION check_ini
+    STR_VAR
+    ini		= "racial_bonus"
+    RET
+    racial_bonus	= value
+  END
+
+  COPY_EXISTING "racethac.2da" "override"
+    LPF 2da_read STR_VAR type = "2da" RET_ARRAY race_thac0 = array END
+
+    SET $race_thac0("92" "DWARF") = racial_bonus	// Axe
+    SET $race_thac0("97" "DWARF") = racial_bonus	// Warhammer
+
+    SET $race_thac0("90" "ELF") = racial_bonus		// Longsword
+    SET $race_thac0("91" "ELF") = racial_bonus		// Shortsword
+    SET $race_thac0("104" "ELF") = racial_bonus		// Longbow
+    SET $race_thac0("105" "ELF") = racial_bonus		// Shortbow
+
+    SET $race_thac0("103" "GNOME") = racial_bonus	// Crossbow
+
+    SET $race_thac0("106" "HALFLING") = racial_bonus	// Dart
+    SET $race_thac0("107" "HALFLING") = racial_bonus	// Sling
+
+    SET $race_thac0("98" "HALFORC") = racial_bonus	// Spear
+
+    LPF 2da_write STR_VAR type = "2da" array = "race_thac0" END
+    PRETTY_PRINT_2DA
+    BUT_ONLY_IF_IT_CHANGES
+END	// more_racial_weapon_affinities
+
+

@@ -160,3 +160,19 @@ LAUNCH_ACTION_FUNCTION run
 END
 
 
+// More Racial Weapon Affinities
+
+BEGIN @13
+GROUP @18
+
+LABEL MH#-MiH_Tweaks-More_Racial_Weapon_Affinities
+
+REQUIRE_PREDICATE FILE_EXISTS_IN_GAME "racethac.2da" @4
+
+LAUNCH_ACTION_FUNCTION run
+  STR_VAR
+  file		= "more_racial_weapon_affinities"
+  location	= "rules"
+END
+
+
