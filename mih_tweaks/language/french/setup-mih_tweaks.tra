@@ -1,17 +1,18 @@
 @0 = ~dummy~
-@1 = ~Ajustement des récompenses d'XP~
-@2 = ~Icônes de sorts de style IWD~
-//@3
-@4 = ~Ce composant n'est pas applicable à votre jeu.~
-@5 = ~Dégâts alternatifs sur les grosses créatures~
+//@1 = ~~
+@2 = ~Icônes de sorts style IWD~
+@3 = ~Donner des points de vie bonus aux monstres~
+@4 = ~Ce composant n'est pas applicable à votre jeu~
+@5 = ~Dégâts alternatifs sur les grandes créatures~
+@6 = ~Modifications des sorts~
+@7 = ~Sorts personnels désactivables (BETA)~
+@8 = ~Protection contre le mal protège contre la Domination.~
+@9 = ~Le niveau du sort affecte les jets de sauvegarde~
+@10 = ~Limiter le nombre de charges des baguettes et de bâtons~
+@11 = ~Modifications d'objets~
+@12 = ~Modifications sur le Challenge.~
+@13 = ~Plus d'affinités raciales pour les armes~
 
-@8 = ~Protection contre le mal bloque la Domination.~
-
-@10 = ~Capacité de charge des Baguettes et des Bâtons~
-
-@17 = ~Tableau de force révisé~
-//@18 = ~Révision des règles du jeu
-@19 = ~Tableau de Dextérité révisé~
-@20 = ~Tableau de Constitution révisé~
-
-@25 = ~Le niveau des sorts affecte les jets de sauvegarde~
+@17 = ~Modifications des règles du jeu~
+@19 = ~Table de Dextérité révisée~
+20 = ~Table de Constitution révisée~
