@@ -11,7 +11,8 @@ BEGIN
     END
 
     LPF 2da_write STR_VAR type = "2da" array = "dex_table" END
-    PRETTY_PRINT_2DA
+    LPF 2da_prettier_print END
+
     BUT_ONLY_IF_IT_CHANGES
 END	// revised_dexterity_table
 

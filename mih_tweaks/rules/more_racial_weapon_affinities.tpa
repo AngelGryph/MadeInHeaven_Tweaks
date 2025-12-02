@@ -26,7 +26,8 @@ BEGIN
     SET $race_thac0("98" "HALFORC") = racial_bonus	// Spear
 
     LPF 2da_write STR_VAR type = "2da" array = "race_thac0" END
-    PRETTY_PRINT_2DA
+    LPF 2da_prettier_print END
+
     BUT_ONLY_IF_IT_CHANGES
 END	// more_racial_weapon_affinities
 
