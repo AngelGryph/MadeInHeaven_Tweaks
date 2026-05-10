@@ -13,15 +13,16 @@ BEGIN
         READ_SHORT (fx_offset + 0x0000) opcode
         READ_LONG (fx_offset + 0x0008) parameter2
 
-        PATCH_IF opcode == 142 AND parameter2 == 43
+        PATCH_IF opcode = 5 AND (parameter2 = 1002 OR parameter2 = 1003)
         BEGIN
           SPRINT $domination_list("%SOURCE_RES%") "-"
         END
       END
     END
 
+  OUTER_SET block_strref = RESOLVE_STR_REF(@1)
 
-  COPY_EXISTING_REGEXP ".*\.spl" "override"
+  COPY_EXISTING_REGEXP "^.+\.spl$" "override"
     SET protection_from_evil = 0
 
     GET_OFFSET_ARRAY fx_array SPL_V10_GEN_EFFECTS
@@ -30,7 +31,7 @@ BEGIN
       READ_SHORT (fx_offset + 0x0000) opcode
       READ_LONG (fx_offset + 0x0008) parameter2
 
-      PATCH_IF opcode == 142 AND parameter2 == 9
+      PATCH_IF opcode = 142 AND parameter2 = 9
       BEGIN
         SET protection_from_evil = 1
       END
@@ -45,13 +46,13 @@ BEGIN
         READ_SHORT (fx_offset + 0x0000) opcode
         READ_LONG (fx_offset + 0x0008) parameter2
 
-        PATCH_IF opcode == 142 AND parameter2 == 9
+        PATCH_IF opcode = 142 AND parameter2 = 9
         BEGIN
           SET protection_from_evil = 1
         END
       END
     END
-        
+
     PATCH_IF (protection_from_evil)
     BEGIN
       PHP_EACH domination_list AS domination_res => blah
@@ -61,7 +62,7 @@ BEGIN
           match_opcode		= 142	// Graphics: Display Special Effect Icon
           match_parameter2	= 9	// Protection from Evil
           opcode		= 206	// Spell: Protection from Spell
-          parameter1		= RESOLVE_STR_REF(@0)
+          parameter1		= block_strref
           parameter2		= 0
           STR_VAR
           resource		= "%domination_res%"
@@ -72,7 +73,7 @@ BEGIN
     BUT_ONLY_IF_IT_CHANGES
 
 
-  COPY_EXISTING_REGEXP ".*\.itm" "override"
+  COPY_EXISTING_REGEXP "^.+\.itm$" "override"
     SET protection_from_evil = 0
 
     GET_OFFSET_ARRAY fx_array ITM_V10_GEN_EFFECTS
@@ -81,7 +82,7 @@ BEGIN
       READ_SHORT (fx_offset + 0x0000) opcode
       READ_LONG (fx_offset + 0x0008) parameter2
 
-      PATCH_IF opcode == 142 AND parameter2 == 9
+      PATCH_IF opcode = 142 AND parameter2 = 9
       BEGIN
         SET protection_from_evil = 1
       END
@@ -96,13 +97,13 @@ BEGIN
         READ_SHORT (fx_offset + 0x0000) opcode
         READ_LONG (fx_offset + 0x0008) parameter2
 
-        PATCH_IF opcode == 142 AND parameter2 == 9
+        PATCH_IF opcode = 142 AND parameter2 = 9
         BEGIN
           SET protection_from_evil = 1
         END
       END
     END
-        
+
     PATCH_IF (protection_from_evil)
     BEGIN
       PHP_EACH domination_list AS domination_res => blah
@@ -112,7 +113,7 @@ BEGIN
           match_opcode		= 142	// Graphics: Display Special Effect Icon
           match_parameter2	= 9	// Protection from Evil
           opcode		= 206	// Spell: Protection from Spell
-          parameter1		= RESOLVE_STR_REF(@9)
+          parameter1		= block_strref
           parameter2		= 0
           STR_VAR
           resource		= "%domination_res%"
