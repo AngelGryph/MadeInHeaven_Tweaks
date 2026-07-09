@@ -37,7 +37,7 @@ GROUP @11
 
 LABEL MH#-MiH_Tweaks-Alt_Damage_Large
 
-REQUIRE_PREDICATE NOT GAME_IS "iwd" @4 
+REQUIRE_PREDICATE GAME_IS "bg2 bgt bgee bg2ee eet" @4 
 
 LAUNCH_ACTION_FUNCTION run
   STR_VAR
@@ -53,6 +53,8 @@ GROUP @11
 
 LABEL MH#-MiH_Tweaks-Cap_Charges
 
+REQUIRE_PREDICATE GAME_IS "bg2 bgt bgee bg2ee eet" @4 
+
 LAUNCH_ACTION_FUNCTION run
   STR_VAR
   file			= "cap_charges"
@@ -67,6 +69,8 @@ GROUP @6
 
 LABEL MH#-MiH_Tweaks-Spell_Level_Saves
 
+REQUIRE_PREDICATE GAME_IS "bg2 bgt bgee bg2ee eet" @4 
+
 LAUNCH_ACTION_FUNCTION run
   STR_VAR
   file		= "spell_level_saving_throws"
@@ -80,6 +84,8 @@ BEGIN @8
 GROUP @6
 
 LABEL MH#-MiH_Tweaks-PFE_Blocks_Domination
+
+REQUIRE_PREDICATE GAME_IS "bg2 bgt bgee bg2ee eet" @4 
 
 LAUNCH_ACTION_FUNCTION run
   STR_VAR
@@ -96,6 +102,8 @@ GROUP @6
 
 LABEL MH#-MiH_Tweaks-Dismissable_Spells
 
+REQUIRE_PREDICATE GAME_IS "bg2 bgt bgee bg2ee eet" @4 
+
 LAUNCH_ACTION_FUNCTION run
   STR_VAR
   file		= "dismissable_spells"
@@ -111,6 +119,8 @@ GROUP @12
 
 LABEL MH#-MiH_Tweaks-Monster_Bonus_HP
 
+REQUIRE_PREDICATE GAME_IS "bg2 bgt bgee bg2ee eet" @4 
+
 LAUNCH_ACTION_FUNCTION run
   STR_VAR
   file		= "monster_bonus_hp"
@@ -124,6 +134,8 @@ BEGIN @17
 GROUP @18
 
 LABEL MH#-MiH_Tweaks-Revised_Strength_Table
+
+REQUIRE_PREDICATE GAME_IS "bg2 bgt bgee bg2ee eet" @4 
 
 LAUNCH_ACTION_FUNCTION run
   STR_VAR
@@ -139,6 +151,8 @@ GROUP @18
 
 LABEL MH#-MiH_Tweaks-Revised_Dexterity_Table
 
+REQUIRE_PREDICATE GAME_IS "bg2 bgt bgee bg2ee eet" @4 
+
 LAUNCH_ACTION_FUNCTION run
   STR_VAR
   file		= "revised_dexterity_table"
@@ -152,6 +166,8 @@ BEGIN @20
 GROUP @18
 
 LABEL MH#-MiH_Tweaks-Revised_Constitution_Table
+
+REQUIRE_PREDICATE GAME_IS "bg2 bgt bgee bg2ee eet" @4 
 
 LAUNCH_ACTION_FUNCTION run
   STR_VAR
@@ -167,7 +183,7 @@ GROUP @18
 
 LABEL MH#-MiH_Tweaks-More_Racial_Weapon_Affinities
 
-REQUIRE_PREDICATE FILE_EXISTS_IN_GAME "racethac.2da" @4
+REQUIRE_PREDICATE GAME_IS "bgee bg2ee eet" @4 
 
 LAUNCH_ACTION_FUNCTION run
   STR_VAR
